@@ -1,0 +1,55 @@
+/* 让 Webview 适配 VS Code 主题 */
+body {
+  font-family: var(--vscode-font-family);
+  color: var(--vscode-editor-foreground);
+  background-color: var(--vscode-editor-background);
+  padding: 10px;
+}
+
+/* 下拉选择框 */
+select {
+  margin-top: 10px;
+  width: 100%;
+  padding: 8px;
+  background-color: var(--vscode-input-background);
+  color: var(--vscode-input-foreground);
+  border: 1px solid var(--vscode-input-border);
+  border-radius: 4px;
+  text-align: center;
+  text-align-last: center; /* 兼容不同浏览器 */
+}
+
+/* 按钮样式 */
+button {
+  margin-top: 16px;
+  padding: 10px;
+  font-size: 14px;
+  background-color: var(--vscode-button-background);
+  color: var(--vscode-button-foreground);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* 鼠标悬停时的按钮颜色 */
+button:hover {
+  background-color: var(--vscode-button-hoverBackground);
+}
+
+/* 进度条容器 */
+.progress-container {
+  width: 100%;
+  background: var(--vscode-input-background);
+  border-radius: 5px;
+  margin-top: 10px;
+}
+
+/* 进度条 */
+.progress-bar {
+  width: 0%;
+  height: 20px;
+  background: var(--vscode-button-background);
+  border-radius: 5px;
+  text-align: center;
+  color: var(--vscode-button-foreground);
+}

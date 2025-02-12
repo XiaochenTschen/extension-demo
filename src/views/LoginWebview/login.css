@@ -1,0 +1,65 @@
+body {
+  font-family: var(--vscode-font-family);
+  color: var(--vscode-foreground);
+  background-color: var(--vscode-editor-background);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* 让 body 充满整个 Webview */
+}
+
+label {
+  margin-bottom: 4px; /* 让标签和输入框之间有一点间距 */
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  margin-bottom: 8px;
+}
+
+.input-container input {
+  flex-grow: 1;
+  padding: 10px;
+  background-color: var(--vscode-input-background);
+  color: var(--vscode-input-foreground);
+  border: 1px solid var(--vscode-input-border);
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.eye-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
+
+button {
+  margin-top: 16px; /* 让按钮与输入框有适当的间距 */
+  padding: 10px;
+  font-size: 14px;
+  background-color: var(--vscode-button-background); /* VS Code 默认蓝色 */
+  color: var(--vscode-button-foreground);
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--vscode-button-hoverBackground); /* VS Code 按钮悬停颜色 */
+}
+

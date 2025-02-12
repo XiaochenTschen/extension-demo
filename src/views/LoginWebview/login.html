@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login View</title>
+  <link rel="stylesheet" href="login.css" />
+</head>
+<body>
+  <label for="username">User Name:</label>
+  <div class="input-container">
+    <input type="text" id="username" /><br>
+  </div>
+
+  <label for="password">Password:</label>
+  <div class="input-container">
+    <input type="password" id="password" />
+    <span class="toggle-password">
+      <img class="eye-icon" id="eye-open" src="resources/icons/eye-open.svg" alt="Show Password" />
+      <img class="eye-icon hidden" id="eye-closed" src="resources/icons/eye-closed.svg" alt="Hide Password" />
+    </span>
+  </div>
+  <br\>
+  <button id="LoginButton">Login</button>
+
+  <script src="login.js"></script>
+</body>
+</html>

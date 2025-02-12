@@ -1,0 +1,82 @@
+{
+  "name": "my-sidebar-extension",
+  "displayName": "我的侧边栏扩展",
+  "description": "示例：在侧边栏中显示一个图标，点击后显示表单",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.96.0"
+  },
+  "activationEvents": [
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "myExtensionContainer",
+          "title": "My Extension",
+          "icon": "resources/icons/sidebar-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "myExtensionContainer": [
+        {
+          "type": "webview",
+          "id": "loginView",
+          "name": "Login"
+        },
+        {
+          "type": "tree",
+          "id": "VPContainerView",
+          "name": "VP Container"
+        },
+        {
+          "type": "webview",
+          "id": "updateView",
+          "name": "Update"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "containerView.run",
+        "title": "Run"
+      },
+      {
+        "command": "containerView.stop",
+        "title": "Stop"
+      }
+    ],
+    "menus": {
+      "view/item/context": [
+        {
+          "command": "containerView.run",
+          "when": "viewItem == 'stopped'",
+          "group": "inline"
+        },
+        {
+          "command": "containerView.stop",
+          "when": "viewItem == 'running'",
+          "group": "inline"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.1",
+    "@types/vscode": "^1.96.0",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "axios": "^1.7.9"
+  }
+}
