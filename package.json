@@ -41,11 +41,13 @@
     "commands": [
       {
         "command": "containerView.run",
-        "title": "Run"
+        "title": "Run",
+        "icon":"$(play)"
       },
       {
         "command": "containerView.stop",
-        "title": "Stop"
+        "title": "Stop",
+        "icon": "$(debug-stop)"
       }
     ],
     "menus": {

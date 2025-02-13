@@ -2,40 +2,26 @@ import * as vscode from 'vscode';
 import * as path from 'path';
 
 export class ContainerItem extends vscode.TreeItem {
-  public isRunning: boolean = false;
+    public isRunning: boolean = false;
 
-  constructor(
-    public readonly label: string,
-    private readonly extensionFolder: string,
-    private readonly iconName: string,
-    public readonly collapsibleState: vscode.TreeItemCollapsibleState = vscode.TreeItemCollapsibleState.None
-  ) {
-    super(label, vscode.TreeItemCollapsibleState.None);
-    
-    this.updateContexValue();
-    this.updateIcon();
-  }
+    constructor(
+        public readonly label: string,
+        public readonly isSpecialItem: boolean = false,
+        public readonly collapsibleState: vscode.TreeItemCollapsibleState = vscode.TreeItemCollapsibleState.None
+    ) {
+        super(label, vscode.TreeItemCollapsibleState.None);
 
-  private updateContexValue() {
-    this.contextValue = this.isRunning ? "running" : "stopped";
-  }
+        this.iconPath = new vscode.ThemeIcon("package");
+        this.updateContexValue();
+    }
 
-  private updateIcon() {
-    const iconFolder = path.join(this.extensionFolder, 'resources', 'icons');
-    this.iconPath = {
-      light: this.isRunning
-        ? vscode.Uri.file(path.join(iconFolder, 'running-light.svg'))
-        : vscode.Uri.file(path.join(iconFolder, `${this.iconName}-light.svg`)),
-      dark: this.isRunning
-        ? vscode.Uri.file(path.join(iconFolder, 'running-dark.svg'))
-        : vscode.Uri.file(path.join(iconFolder, `${this.iconName}-dark.svg`)),
-    };
-  }
+    private updateContexValue() {
+        if(!this.isSpecialItem)
+            this.contextValue = this.isRunning ? "running" : "stopped";
+    }
 
-  updateStatus(isRunning : boolean) {
-    this.isRunning = isRunning;
-    this.updateContexValue();
-    this.updateIcon();
-  }
-
+    updateStatus(isRunning : boolean) {
+        this.isRunning = isRunning;
+        this.updateContexValue();
+    }
 }

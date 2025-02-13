@@ -9,45 +9,28 @@ import { AuthService } from './services/AuthService';
 import { ContainerService } from './services/ContainerServices';
 
 export function activate(context: vscode.ExtensionContext) {
-  const user = new User();
-  const apiClient = new ApiClient(user);
-  const authService = new AuthService(apiClient, user);
-  const containerService = new ContainerService(apiClient);
-  const loginView = new LoginViewProvider(context, user, authService);
-  const containerView = new VPContainerViewProvider(context, containerService);
-  const updateView = new UpdateViewProvider(context);
+    const user = new User();
+    const apiClient = new ApiClient(user);
+    const authService = new AuthService(apiClient, user);
+    const containerService = new ContainerService(apiClient);
+    const loginView = new LoginViewProvider(context, user, authService);
+    const containerView = new VPContainerViewProvider(context, containerService);
+    const updateView = new UpdateViewProvider(context);
 
-  // login webview
-  context.subscriptions.push(
-      vscode.window.registerWebviewViewProvider('loginView', loginView)
-  );
+    // login webview
+    context.subscriptions.push(
+        vscode.window.registerWebviewViewProvider('loginView', loginView)
+    );
 
-  // vp container treeview
-  vscode.window.registerTreeDataProvider('VPContainerView', containerView);
-  context.subscriptions.push(
-    vscode.commands.registerCommand(
-      'containerView.run',
-      (item: ContainerItem) => {
-        vscode.window.showInformationMessage(`Running: ${item.label}`);
-        containerView.runItem(item);
-      }
-    )
-  );
+    // vp container treeview
+    context.subscriptions.push(
+        vscode.window.registerTreeDataProvider('VPContainerView', containerView)
+    );
 
-  context.subscriptions.push(
-    vscode.commands.registerCommand(
-      'containerView.stop',
-      (item: ContainerItem) => {
-        vscode.window.showInformationMessage(`Stopping: ${item.label}`);
-        containerView.stopItem(item);
-      }
-    )
-  );
-
-  // update webview
-  context.subscriptions.push(
-    vscode.window.registerWebviewViewProvider('updateView', updateView)
-  );
+    // update webview
+    context.subscriptions.push(
+        vscode.window.registerWebviewViewProvider('updateView', updateView)
+    );
 }
 
 export function deactivate() {}
