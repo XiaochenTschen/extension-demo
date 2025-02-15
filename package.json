@@ -28,6 +28,11 @@
         },
         {
           "type": "tree",
+          "id": "myTreeview",
+          "name": "myTreeview"
+        },
+        {
+          "type": "tree",
           "id": "VPContainerView",
           "name": "VP Container"
         },
@@ -39,6 +44,10 @@
       ]
     },
     "commands": [
+      {
+        "command": "myTreeview.start",
+        "title": "start"
+      },
       {
         "command": "containerView.run",
         "title": "Run",
@@ -52,6 +61,11 @@
     ],
     "menus": {
       "view/item/context": [
+        {
+          "command": "myTreeview.start",
+          "when": "viewItem == 'parentItem'",
+          "group": "inline"
+        },
         {
           "command": "containerView.run",
           "when": "viewItem == 'stopped'",

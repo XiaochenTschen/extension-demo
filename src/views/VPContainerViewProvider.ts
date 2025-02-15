@@ -36,6 +36,15 @@ export class VPContainerViewProvider implements vscode.TreeDataProvider<Containe
             )
         );
 
+        context.subscriptions.push(
+            vscode.commands.registerCommand(
+                'containerView.addItem',
+                () => {
+                vscode.window.showInformationMessage('Add item ... ');
+                }
+            )
+        );
+
         EventBus.onDidLogin( () => { this.refresh(); } );
     }
 
@@ -45,7 +54,7 @@ export class VPContainerViewProvider implements vscode.TreeDataProvider<Containe
 
     getChildren(): ContainerItem[] {
         const addNewItem = new ContainerItem("Add New Container", true);
-        addNewItem.command = { command: "containerTree.addItem", title: "Add New Container" };
+        addNewItem.command = { command: "containerView.addItem", title: "Add New Container" };
         addNewItem.iconPath = new vscode.ThemeIcon("add");
 
         return [...this.items, addNewItem];
