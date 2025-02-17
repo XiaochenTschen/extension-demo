@@ -8,6 +8,7 @@ import { AuthService } from './services/AuthService';
 import { ContainerService } from './services/ContainerServices';
 import { MyTreeViewProvider } from './views/MyTreeviewProvider';
 import { TreeviewService } from './services/TreeviewService';
+import { MyTreeViewItem } from './views/MyTreeview/myTreeviewItem';
 
 export function activate(context: vscode.ExtensionContext) {
     const user = new User();
@@ -69,6 +70,7 @@ export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(
         vscode.window.registerWebviewViewProvider('updateView', updateView)
     );
+
 }
 
 export function deactivate() {}

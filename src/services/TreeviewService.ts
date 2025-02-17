@@ -4,14 +4,14 @@ export class TreeviewService {
         return typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean';
     }
 
-    jsonToTreeitems(json: any): MyTreeViewItem[] {
+    jsonToTreeitems(json: any, isTopLevel: boolean = true): MyTreeViewItem[] {
         let items: MyTreeViewItem[] = [];
         if(Array.isArray(json)) {
             json.forEach((element, index) => {
                 if(this.isBasicType(element)) {
                     items.push(new MyTreeViewItem(element.toString(), index.toString()));
                 } else {
-                    items.push(new MyTreeViewItem(index.toString(), undefined, this.jsonToTreeitems(element)));
+                    items.push(new MyTreeViewItem(index.toString(), undefined, this.jsonToTreeitems(element, false)));
                 }
             });
         } else if(typeof json === 'object' && json !== null) {
@@ -19,7 +19,8 @@ export class TreeviewService {
                 if(this.isBasicType(value)) {
                     items.push(new MyTreeViewItem(key.toString(), String(value)));
                 } else {
-                    items.push(new MyTreeViewItem(key.toString(), undefined, this.jsonToTreeitems(value)));
+                    const contextValue = isTopLevel ? 'parentItem' : undefined;
+                    items.push(new MyTreeViewItem(key.toString(), undefined, this.jsonToTreeitems(value, false), contextValue));
                 }
             });
         }

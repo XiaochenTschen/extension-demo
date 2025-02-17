@@ -9,10 +9,17 @@ export class MyTreeViewProvider implements vscode.TreeDataProvider<MyTreeViewIte
 
   constructor(private context: vscode.ExtensionContext) {
     context.subscriptions.push(
-        vscode.commands.registerCommand("myTreeview.start", (item: MyTreeViewItem) => {
-            vscode.window.showInformationMessage(`Starting ${item.label}...`);
-        })
-    );
+      vscode.commands.registerCommand('myTreeview.start', (item: MyTreeViewItem) => {
+          // 获取该条目下的所有子项
+          if (item.children) {
+              // 假设我们要获取 name 的 tooltip
+              const nameItem = item.children.find(child => child.label === 'name');
+              if (nameItem && nameItem.tooltip) {
+                  vscode.window.showInformationMessage(`Selected name: ${nameItem.tooltip}`);
+              }
+          }
+      })
+  );
   }
 
   getTreeItem(element: MyTreeViewItem): vscode.TreeItem {

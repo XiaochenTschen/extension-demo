@@ -5,7 +5,8 @@ export class MyTreeViewItem extends vscode.TreeItem {
     constructor(
         label: string,
         tooltip?: string,
-        children?:MyTreeViewItem[]
+        children?:MyTreeViewItem[],
+        contextValue?: string
     ) {
         let collapsibleState = (children === undefined ? vscode.TreeItemCollapsibleState.None :
                                                          vscode.TreeItemCollapsibleState.Expanded);
@@ -14,8 +15,8 @@ export class MyTreeViewItem extends vscode.TreeItem {
             this.tooltip = tooltip;
         }
         this.children = children;
-        if (collapsibleState !== vscode.TreeItemCollapsibleState.None) {
-            this.contextValue = "parentItem";
+        if (contextValue) {
+            this.contextValue = contextValue;
         }
     }
 }
