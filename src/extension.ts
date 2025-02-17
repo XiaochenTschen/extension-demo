@@ -7,6 +7,7 @@ import { ApiClient } from './ApiClient';
 import { AuthService } from './services/AuthService';
 import { ContainerService } from './services/ContainerServices';
 import { MyTreeViewProvider } from './views/MyTreeviewProvider';
+import { TreeviewService } from './services/TreeviewService';
 
 export function activate(context: vscode.ExtensionContext) {
     const user = new User();
@@ -17,6 +18,37 @@ export function activate(context: vscode.ExtensionContext) {
     const myTreeview = new MyTreeViewProvider(context);
     const containerView = new VPContainerViewProvider(context, containerService);
     const updateView = new UpdateViewProvider(context);
+    const treeviewService = new TreeviewService();
+
+    const obj = {
+        0: {
+            name: "Alice",
+            age: 30,
+            address: {
+                city: "New York",
+                zip: "10001"
+            }
+        },
+        1: {
+            name: "Bob",
+            age: 25,
+            address: {
+                city: "Los Angeles",
+                zip: "90001"
+            }
+        },
+        2: {
+            name: "Charlie",
+            age: 35,
+            address: {
+                city: "Chicago",
+                zip: "60601"
+            }
+        }
+    };
+
+    const treeitems = treeviewService.jsonToTreeitems(obj);
+    myTreeview.updateItems(treeitems);
 
     // login webview
     context.subscriptions.push(
