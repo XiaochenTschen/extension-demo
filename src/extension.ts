@@ -21,16 +21,26 @@ export function activate(context: vscode.ExtensionContext) {
     const updateView = new UpdateViewProvider(context);
     const treeviewService = new TreeviewService();
 
-    const obj = {
-        0: {
+    const obj = [
+        {
             name: "Alice",
             age: 30,
             address: {
                 city: "New York",
                 zip: "10001"
-            }
+            },
+            subject: [
+                {
+                    name: "Math",
+                    score: 95
+                },
+                {
+                    name: "English",
+                    score: 85
+                }
+            ]
         },
-        1: {
+        {
             name: "Bob",
             age: 25,
             address: {
@@ -38,7 +48,7 @@ export function activate(context: vscode.ExtensionContext) {
                 zip: "90001"
             }
         },
-        2: {
+        {
             name: "Charlie",
             age: 35,
             address: {
@@ -46,7 +56,7 @@ export function activate(context: vscode.ExtensionContext) {
                 zip: "60601"
             }
         }
-    };
+    ];
 
     const treeitems = treeviewService.jsonToTreeitems(obj);
     myTreeview.updateItems(treeitems);

@@ -11,7 +11,13 @@ export class TreeviewService {
                 if(this.isBasicType(element)) {
                     items.push(new MyTreeViewItem(element.toString(), index.toString()));
                 } else {
-                    items.push(new MyTreeViewItem(index.toString(), undefined, this.jsonToTreeitems(element, false)));
+                    const contextValue = isTopLevel ? 'parentItem' : undefined;
+                    items.push(new MyTreeViewItem(
+                        index.toString(), 
+                        undefined, 
+                        this.jsonToTreeitems(element, false),
+                        contextValue
+                    ));
                 }
             });
         } else if(typeof json === 'object' && json !== null) {
@@ -19,8 +25,11 @@ export class TreeviewService {
                 if(this.isBasicType(value)) {
                     items.push(new MyTreeViewItem(key.toString(), String(value)));
                 } else {
-                    const contextValue = isTopLevel ? 'parentItem' : undefined;
-                    items.push(new MyTreeViewItem(key.toString(), undefined, this.jsonToTreeitems(value, false), contextValue));
+                    items.push(new MyTreeViewItem(
+                        key.toString(), 
+                        undefined, 
+                        this.jsonToTreeitems(value, false)
+                    ));
                 }
             });
         }
