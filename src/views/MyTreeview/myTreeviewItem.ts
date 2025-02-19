@@ -9,10 +9,12 @@ export class MyTreeViewItem extends vscode.TreeItem {
         contextValue?: string
     ) {
         let collapsibleState = (children === undefined ? vscode.TreeItemCollapsibleState.None :
-                                                         vscode.TreeItemCollapsibleState.Expanded);
+                                                         vscode.TreeItemCollapsibleState.Collapsed);
         super(label, collapsibleState);
         if(tooltip) {
-            this.tooltip = tooltip;
+            // this.tooltip = tooltip; /* this is a normal tooltip */
+            this.tooltip = new vscode.MarkdownString(tooltip); /* this is a markdown tooltip, which can be copied */
+            this.tooltip.isTrusted = true; /* allow the tooltip to be trusted */
         }
         this.children = children;
         if (contextValue) {
