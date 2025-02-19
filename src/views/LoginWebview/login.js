@@ -29,4 +29,20 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+window.addEventListener('message', event => {
+    const message = event.data;
+    switch (message.command) {
+        case 'setInitialValues':
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            if (message.data.username) {
+                usernameInput.value = message.data.username;
+            }
+            if (message.data.password) {
+                passwordInput.value = message.data.password;
+            }
+            break;
+    }
+});
+
 

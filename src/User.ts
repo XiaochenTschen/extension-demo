@@ -1,12 +1,15 @@
+import * as vscode from 'vscode';
+
 export class User {
     private username: string;
     private password: string;
     private token: string | null;
   
     constructor(username: string = '', password: string = '') {
-      this.username = username;
-      this.password = password;
-      this.token = null;
+        const config = vscode.workspace.getConfiguration('myExtension');
+        this.username = username || config.get('username') || '';
+        this.password = password || config.get('password') || '';
+        this.token = config.get('githubToken') || null;
     }
   
     updateUserName(value: string): void {
@@ -39,6 +42,27 @@ export class User {
   
     getUserInfo(): string {
       return `User Name: ${this.username}, Password: ${this.password}, Token: ${this.token}`;
+    }
+
+    async saveToConfig(): Promise<void> {
+        const config = vscode.workspace.getConfiguration('myExtension');
+        await config.update('username', this.username, true);
+        if (this.token) {
+            await config.update('githubToken', this.token, true);
+        }
+    }
+
+    loadFromConfig(): void {
+        const config = vscode.workspace.getConfiguration('myExtension');
+        this.username = config.get('username') || this.username;
+        this.token = config.get('githubToken') || this.token;
+    }
+
+    getLoginInfo(): { username: string; password: string } {
+        return {
+            username: this.username,
+            password: this.password
+        };
     }
 }
   

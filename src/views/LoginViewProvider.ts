@@ -25,6 +25,13 @@ export class LoginViewProvider implements vscode.WebviewViewProvider {
 
         webviewView.webview.html = this.getHtmlForWebview(webviewView.webview);
 
+        // 发送初始值到 webview
+        const loginInfo = this.user.getLoginInfo();
+        webviewView.webview.postMessage({ 
+            command: 'setInitialValues', 
+            data: loginInfo 
+        });
+
         // listen button click event
         webviewView.webview.onDidReceiveMessage((message) => {
             if (message.command === 'login') {

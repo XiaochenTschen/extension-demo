@@ -77,6 +77,26 @@
           "group": "inline"
         }
       ]
+    },
+    "configuration": {
+      "title": "My Extension",
+      "properties": {
+        "myExtension.username": {
+          "type": "string",
+          "default": "",
+          "description": "Default username"
+        },
+        "myExtension.password": {
+          "type": "string",
+          "default": "",
+          "description": "Default password"
+        },
+        "myExtension.githubToken": {
+          "type": "string",
+          "default": "",
+          "description": "GitHub Personal Access Token"
+        }
+      }
     }
   },
   "scripts": {
